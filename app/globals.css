@@ -1,26 +1,123 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --arc-palette-foregroundPrimary: #EEF0F9FF;
+    --arc-palette-focus: #5D72BBCE;
+    --arc-palette-backgroundExtra: #141523;
+    --arc-palette-subtitle: #77787DFF;
+    --arc-palette-hover: #6D80C27A;
+    --arc-palette-maxContrastColor: #EEF0F9FF;
+    --arc-background-simple-color: #3B56B7FF;
+    --arc-palette-title: #E1E5F2FF;
+    --arc-palette-foregroundTertiary: #3B56B7FF;
+    --arc-palette-background: #161727;
+    --arc-palette-minContrastColor: #3750ACFF;
+    --arc-palette-foregroundSecondary: #8294D7FF;
+    --arc-palette-cutoutColor: #2e2e38;
+    --radius: 0.625rem;
+    --color-border: #2e2e38;
+
+
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --color-background: var(--arc-palette-background);
+    --color-foreground: var(--arc-palette-foregroundPrimary);
+    --color-card: var(--arc-palette-background);
+    --color-card-foreground: var(--arc-palette-foregroundPrimary);
+    --color-popover: var(--arc-palette-background);
+    --color-popover-foreground: var(--arc-palette-foregroundPrimary);
+    --color-primary: var(--arc-palette-focus);
+    --color-primary-foreground: var(--arc-palette-maxContrastColor);
+    --color-secondary: var(--arc-palette-backgroundExtra);
+    --color-secondary-foreground: var(--arc-palette-foregroundSecondary);
+    --color-muted: var(--arc-palette-backgroundExtra);
+    --color-muted-foreground: var(--arc-palette-subtitle);
+    --color-accent: var(--arc-palette-hover);
+    --color-accent-foreground: var(--arc-palette-title);
+    --color-destructive: var(--arc-palette-cutoutColor);
+    --color-destructive-foreground: var(--arc-palette-maxContrastColor);
+    --color-border: var(--arc-palette-cutoutColor);
+    --color-input: var(--arc-palette-backgroundExtra);
+    --color-ring: var(--arc-palette-focus);
+    --color-chart-1: var(--arc-palette-focus);
+    --color-chart-2: var(--arc-palette-foregroundSecondary);
+    --color-chart-3: var(--arc-palette-foregroundTertiary);
+    --color-chart-4: var(--arc-palette-hover);
+    --color-chart-5: var(--arc-palette-cutoutColor);
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --color-sidebar: #141523;
+    --color-sidebar-foreground: var(--arc-palette-foregroundPrimary);
+    --color-sidebar-primary: var(--arc-palette-focus);
+    --color-sidebar-primary-foreground: var(--arc-palette-maxContrastColor);
+    --color-sidebar-accent: var(--arc-palette-backgroundExtra);
+    --color-sidebar-accent-foreground: var(--arc-palette-foregroundSecondary);
+    --color-sidebar-border: var(--arc-palette-cutoutColor);
+    --color-sidebar-ring: var(--arc-palette-focus);
+    --color-info: #cfd0d3;
+    --color-description: #fff9;
+    --color-button1: #40678c;
+    --color-button2: #2c5378;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+@keyframes sound-wave-1 {
+    0%, 100% { height: 60%; }
+    50% { height: 100%; }
+}
+
+@keyframes sound-wave-2 {
+    0%, 100% { height: 80%; }
+    50% { height: 40%; }
+}
+
+@keyframes sound-wave-3 {
+    0%, 100% { height: 40%; }
+    50% { height: 90%; }
+}
+
+@keyframes sound-wave-4 {
+    0%, 100% { height: 100%; }
+    50% { height: 30%; }
+}
+
+@keyframes sound-wave-5 {
+    0%, 100% { height: 70%; }
+    50% { height: 100%; }
+}
+
+.animate-sound-wave-1 {
+    animation: sound-wave-1 1.2s ease-in-out infinite;
+}
+
+.animate-sound-wave-2 {
+    animation: sound-wave-2 1.4s ease-in-out infinite;
+}
+
+.animate-sound-wave-3 {
+    animation: sound-wave-3 1.1s ease-in-out infinite;
+}
+
+.animate-sound-wave-4 {
+    animation: sound-wave-4 1.3s ease-in-out infinite;
+}
+
+.animate-sound-wave-5 {
+    animation: sound-wave-5 1.5s ease-in-out infinite;
 }
