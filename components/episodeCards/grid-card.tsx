@@ -69,7 +69,7 @@ const GridCard = ({episode}: { episode: Episode }) => {
                     className={`absolute top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center opacity-0 transition-opacity duration-300
           ${!isPlaying ? "group-hover:opacity-100" : "opacity-0"}`}
                 >
-                    <Play className="text-white"/>
+                    <Play fill={'white'} className="text-white"/>
                 </div>
                 <Image
                     className="min-w-[110px] min-h-[110px]"
@@ -104,7 +104,7 @@ const GridCard = ({episode}: { episode: Episode }) => {
                     )}
 
                     <Tooltip>
-                        <TooltipTrigger>
+                        <TooltipTrigger className="text-start">
                             <Link href={episode.trackViewUrl} className="w-max" target="_blank">
                                 <h2 className="hover:underline truncate max-w-[250px] text-[14px]">
                                     {episode.trackName}

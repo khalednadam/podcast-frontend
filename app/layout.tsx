@@ -1,19 +1,27 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import {
   SidebarInset,
   SidebarProvider,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import Header from "@/components/header";
+import localFont from "next/font/local";
 
-const plex = IBM_Plex_Sans_Arabic({
-  subsets: ["latin", "arabic"],
-  weight: "400",
+const gtAmerica = localFont({
+  src: './fonts/gt-america.woff',
+  display: 'swap',
+  variable: '--font-gtamerica',
+  weight: '700',
 });
+const sfMono = localFont({
+  src: './fonts/SF-Mono-Regular.otf',
+  display: 'swap',
+  variable: '--font-sfMono',
+  weight: '400',
+});
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className={`${gtAmerica.variable} ${sfMono.variable}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

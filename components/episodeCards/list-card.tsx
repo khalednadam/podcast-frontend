@@ -62,7 +62,7 @@ const ListCard = ({episode}: { episode: Episode }) => {
                     className={`absolute top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center opacity-0 transition-opacity duration-300
           ${!isPlaying ? "group-hover:opacity-100" : "opacity-0"}`}
                 >
-                    <Play className="text-white"/>
+                    <Play fill={'white'} className="text-white"/>
                 </div>
                 <Image
                     className="min-w-[100px] min-h-[100px]"
@@ -75,7 +75,7 @@ const ListCard = ({episode}: { episode: Episode }) => {
             <div className="flex flex-col p-[5px] w-[85%] h-[100px] items-start py-2 mx-2.5  justify-between">
                 <div>
                     <Tooltip>
-                        <TooltipTrigger>
+                        <TooltipTrigger className="text-start">
                             <Link
                                 href={episode.trackViewUrl}
                                 className="max-w-[90%]"
@@ -136,7 +136,7 @@ const ListCard = ({episode}: { episode: Episode }) => {
             <div className="!top-0 !bottom-0 right-0 h-full flex-1 flex justify-center items-center absolute">
                 <div className={"flex flex-col justify-center items-center"}>
                     <Button variant={"ghost"} size={"icon"} onClick={() => playEpisode(episode)}>
-                        <Play className="text-white"/>
+                        <Play fill={'white'} className="text-white"/>
                     </Button>
                     <DemoDialog>
                         <Button variant={"ghost"} size={"icon"}>

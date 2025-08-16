@@ -111,11 +111,11 @@ const Podcasts = () => {
                                         <EllipsisVertical width={20} height={20}/>
                                     </div>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent>
+                                <DropdownMenuContent className={'bg-gradient-to-t from-accent1 to-accent2 text-[14px]'}>
                                     {layout !== "scroll" && (
                                         <DropdownMenuCheckboxItem
                                             onCheckedChange={() => setLayout("scroll")}
-                                            className={"cursor-pointer p-3 text-[14px]"}
+                                            className={"cursor-pointer py-0 text-[14px]"}
                                         >
                                             Switch layout to Scroll
                                         </DropdownMenuCheckboxItem>
@@ -123,23 +123,21 @@ const Podcasts = () => {
                                     {layout !== "grid" && (
                                         <DropdownMenuCheckboxItem
                                             onCheckedChange={() => setLayout("grid")}
-                                            className={"cursor-pointer p-3 text-[14px]"}
-                                        >
+                                            className={"cursor-pointer py-2 px-3 text-[14px]"}>
                                             Switch layout to Grid
                                         </DropdownMenuCheckboxItem>
                                     )}
                                     {layout !== "list" && (
                                         <DropdownMenuCheckboxItem
                                             onCheckedChange={() => setLayout("list")}
-                                            className={"cursor-pointer p-3 text-[14px]"}
-                                        >
+                                            className={"cursor-pointer py-2 px-3 text-[14px]"}>
                                             Switch layout to List
                                         </DropdownMenuCheckboxItem>
                                     )}
                                     {layout !== "compact" && (
                                         <DropdownMenuCheckboxItem
                                             onCheckedChange={() => setLayout("compact")}
-                                            className={"cursor-pointer p-3 text-[14px]"}
+                                            className={"cursor-pointer py-2 px-3 text-[14px]"}
                                         >
                                             Switch layout to Compact
                                         </DropdownMenuCheckboxItem>

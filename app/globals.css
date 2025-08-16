@@ -19,8 +19,6 @@
     --arc-palette-cutoutColor: #2e2e38;
     --radius: 0.625rem;
     --color-border: #2e2e38;
-
-
 }
 
 @theme inline {
@@ -64,11 +62,16 @@
     --color-description: #fff9;
     --color-button1: #40678c;
     --color-button2: #2c5378;
+    --color-accent1: #404080;
+    --color-accent2: #BA6FDE;
+
+    /*--font-gtAmerica: var('--font-gtamerica');*/
 }
 
 @layer base {
     * {
         @apply border-border outline-ring/50;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     }
 
     body {
@@ -78,28 +81,86 @@
 
 
 @keyframes sound-wave-1 {
-    0%, 100% { height: 60%; }
-    50% { height: 100%; }
+    0%, 100% {
+        height: 60%;
+    }
+    50% {
+        height: 100%;
+    }
 }
 
 @keyframes sound-wave-2 {
-    0%, 100% { height: 80%; }
-    50% { height: 40%; }
+    0%, 100% {
+        height: 80%;
+    }
+    50% {
+        height: 40%;
+    }
 }
 
 @keyframes sound-wave-3 {
-    0%, 100% { height: 40%; }
-    50% { height: 90%; }
+    0%, 100% {
+        height: 40%;
+    }
+    50% {
+        height: 90%;
+    }
 }
 
 @keyframes sound-wave-4 {
-    0%, 100% { height: 100%; }
-    50% { height: 30%; }
+    0%, 100% {
+        height: 100%;
+    }
+    50% {
+        height: 30%;
+    }
 }
 
 @keyframes sound-wave-5 {
-    0%, 100% { height: 70%; }
-    50% { height: 100%; }
+    0%, 100% {
+        height: 70%;
+    }
+    50% {
+        height: 100%;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    transition: width 0.2s ease, height 0.2s ease;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-border);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+    opacity: 0.8;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+*:hover::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+*:hover::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) var(--color-border);
 }
 
 .animate-sound-wave-1 {

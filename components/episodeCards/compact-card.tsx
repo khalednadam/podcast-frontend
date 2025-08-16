@@ -19,7 +19,7 @@ const CompactCard = ({episode}: { episode: Episode }) => {
             className="border-b border-border flex items-center pb-2 group cursor-pointer"
             onClick={() => playEpisode(episode)}
         >
-            <div className="relative overflow-hidden">
+            <div className="relative  w-[50px]">
                 {isPlaying && (
                     <div
                         className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black/40 rounded-[5px]">
@@ -40,24 +40,22 @@ const CompactCard = ({episode}: { episode: Episode }) => {
 
                 <div className={`absolute top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center opacity-0  transition-opacity duration-300
           ${!isPlaying ? 'group-hover:opacity-100' : 'opacity-0'}`}>
-                    <Play className="text-white"/>
+                    <Play fill={'white'} className="text-white"/>
                 </div>
                 <Image
-                    className="rounded min-w-[50px] min-h-[50px]"
+                    className="rounded min-w-[50px] min-h-[50px] w-[50px] h-[50px]"
                     src={episode.artworkUrl600}
                     alt={episode.trackName}
                     width={50}
                     height={50}
                 />
             </div>
-            <div className="flex flex-col flex-1">
+            <div className="flex flex-col w-full truncate">
                 <Tooltip>
-                    <TooltipTrigger>
-                        <Link href={episode.trackViewUrl} className="w-max" target="_blank">
-                            <h2 className="mx-2.5 hover:underline truncate max-w-[250px]">
-                                {episode.trackName}
-                            </h2>
-                        </Link>
+                    <TooltipTrigger className="text-start w-full">
+                        <h2 className="mx-2.5 hover:underline truncate w-full">
+                            {episode.trackName}
+                        </h2>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>{episode.trackName}</p>
@@ -86,7 +84,7 @@ const CompactCard = ({episode}: { episode: Episode }) => {
                     </p>
                 )}
             </div>
-            <div>
+            <div className={'flex w-[50px]'}>
                 <DemoDialog>
                     <Button variant={"ghost"} size={"icon"}>
                         <EllipsisVertical/>

@@ -27,11 +27,11 @@ const Podcasts = () => {
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(false);
     const [isGridLayout, setIsGridLayout] = useState(() => {
-      if(typeof window !== 'undefined') {
-        const stored = localStorage.getItem("podcasts-grid");
-        return stored === "true";
-      }
-      return false;
+        if (typeof window !== 'undefined') {
+            const stored = localStorage.getItem("podcasts-grid");
+            return stored === "true";
+        }
+        return false;
     });
 
     const checkScrollButtons = () => {
@@ -105,12 +105,12 @@ const Podcasts = () => {
                                         <EllipsisVertical width={20} height={20}/>
                                     </div>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent>
+                                <DropdownMenuContent className={'bg-gradient-to-t from-accent1 to-accent2 text-[14px]'}>
                                     {
                                         isGridLayout ?
                                             (
                                                 <DropdownMenuCheckboxItem
-                                                    className={'cursor-pointer p-3'}
+                                                    className={'cursor-pointer py-2 px-3 text-[14px]'}
                                                     checked={isGridLayout}
                                                     onCheckedChange={() => setIsGridLayout(!isGridLayout)}
                                                 >
@@ -119,7 +119,7 @@ const Podcasts = () => {
                                             ) :
                                             (
                                                 <DropdownMenuCheckboxItem
-                                                    className={'cursor-pointer p-3'}
+                                                    className={'cursor-pointer py-2 px-3 text-[14px]'}
                                                     checked={isGridLayout}
                                                     onCheckedChange={() => setIsGridLayout(!isGridLayout)}
                                                 >

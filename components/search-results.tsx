@@ -16,7 +16,7 @@ const SearchResults = () => {
                         <Loader2 className="animate-spin" width={50} height={50}/>
                     </div>
                 ) : (
-                     !keyword || keyword?.trim().length === 0 ?
+                    !keyword || keyword?.trim().length === 0 ?
                         (
                             <div className="flex justify-center items-center h-full">
                                 <h1 className="font-extralight text-[16px] opacity-70 mt-16">
@@ -26,11 +26,9 @@ const SearchResults = () => {
                         ) :
                         (
                             <>
-
                                 <Podcasts/>
                                 <Episodes/>
                             </>
-
                         )
                 )}
         </div>
