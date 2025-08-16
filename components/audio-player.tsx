@@ -99,6 +99,60 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     }
   }, []);
 
+  useEffect(() => {
+    if (episode && audioRef.current) {
+      console.log("Episode changed, setting loading to true");
+      setIsLoading(true);
+      setInternalIsPlaying(false);
+      audioRef.current.load();
+    }
+  }, [episode?.episodeUrl]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleLoadStart = () => {
+      console.log("Audio loadstart - setting loading to true");
+      setIsLoading(true);
+    };
+    
+    const handleCanPlay = () => {
+      console.log("Audio canplay - setting loading to false");
+      setIsLoading(false);
+      if (episode && !localStorage.getItem(`episode_${episode.episodeGuid}_paused`)) {
+        audio.play().then(() => {
+          setInternalIsPlaying(true);
+        }).catch((error) => {
+          console.error("Error auto-playing:", error);
+          setInternalIsPlaying(false);
+        });
+      }
+    };
+    
+    const handleEnded = () => {
+      setInternalIsPlaying(false);
+      setIsLoading(false);
+    };
+    
+    const handleError = () => {
+      setInternalIsPlaying(false);
+      setIsLoading(false);
+    };
+
+    audio.addEventListener("loadstart", handleLoadStart);
+    audio.addEventListener("canplay", handleCanPlay);
+    audio.addEventListener("ended", handleEnded);
+    audio.addEventListener("error", handleError);
+
+    return () => {
+      audio.removeEventListener("loadstart", handleLoadStart);
+      audio.removeEventListener("canplay", handleCanPlay);
+      audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener("error", handleError);
+    };
+  }, [episode]);
+
   const handleTimeUpdate = () => {
     if (audioRef.current) {
       setCurrentTime(audioRef.current.currentTime);
@@ -171,19 +225,23 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
 
   const handlePlayPause = () => {
     if (audioRef.current && episode) {
-      let newIsPlaying = internalIsPlaying;
       if (isPlaying) {
         audioRef.current.pause();
         setInternalIsPlaying(false);
-        newIsPlaying = false;
         localStorage.setItem(`episode_${episode.episodeGuid}_playing`, "false");
+        localStorage.setItem(`episode_${episode.episodeGuid}_paused`, "true");
       } else {
-        audioRef.current.play().catch((error) => {
+        setIsLoading(true);
+        audioRef.current.play().then(() => {
+          setInternalIsPlaying(true);
+          setIsLoading(false);
+          localStorage.setItem(`episode_${episode.episodeGuid}_playing`, "true");
+          localStorage.removeItem(`episode_${episode.episodeGuid}_paused`);
+        }).catch((error) => {
           console.error("Error playing audio:", error);
+          setIsLoading(false);
+          setInternalIsPlaying(false);
         });
-        setInternalIsPlaying(true);
-        newIsPlaying = true;
-        localStorage.setItem(`episode_${episode.episodeGuid}_playing`, "true");
       }
     }
 
@@ -252,40 +310,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     onSkipForward?.();
   };
 
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const handleLoadStart = () => setIsLoading(true);
-    const handleCanPlay = () => setIsLoading(false);
-    const handleEnded = () => {
-      setInternalIsPlaying(false);
-    };
-    const handleError = () => setInternalIsPlaying(false);
-
-    audio.addEventListener("ended", handleEnded);
-    audio.addEventListener("error", handleError);
-    audio.addEventListener("loadstart", handleLoadStart);
-    audio.addEventListener("canplay", handleCanPlay);
-
-    return () => {
-      audio.removeEventListener("ended", handleEnded);
-      audio.removeEventListener("error", handleError);
-      audio.removeEventListener("loadstart", handleLoadStart);
-      audio.removeEventListener("canplay", handleCanPlay);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (episode && audioRef.current) {
-      setInternalIsPlaying(true);
-      audioRef.current.play().catch((error) => {
-        console.error("Error auto-playing episode:", error);
-        setInternalIsPlaying(false);
-      });
-    }
-  }, [episode]);
-
   if (!episode) {
     return null;
   }
@@ -324,7 +348,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
                 className={"uppercase text-[10px] pb-[2px] font-bold"}
                 style={{ fontFamily: "var(--font-gtamerica)" }}
               >
-                {isLoading ? "loading" : isPlaying ? "playing" : "paused"}
+                {isLoading ? (
+                  <span className="flex items-center gap-1">
+                    loading
+                  </span>
+                ) : isPlaying ? "playing" : "paused"}
               </p>
               <h4 className="font-medium text-sm truncate">
                 {episode.trackName}
@@ -334,7 +362,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
                   className="text-xs text-muted-foreground truncate"
                   style={{ color: genreColor }}
                 >
-                  {episode.collectionName}
+                  {episode.collectionName} 
                 </p>
               </Link>
             </div>
