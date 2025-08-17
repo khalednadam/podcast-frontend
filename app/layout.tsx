@@ -9,6 +9,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 import Header from "@/components/header";
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
+import { Suspense } from "react";
 
 const gtAmerica = localFont({
   src: './fonts/gt-america.woff',
@@ -46,7 +47,9 @@ export default function RootLayout({
           <SidebarProvider>
             <AppSidebar />
             <SidebarInset className="w-[calc(100%-225px)]">
-              <Header />
+              <Suspense fallback={<div className="h-16 bg-background" />}>
+                <Header />
+              </Suspense>
               <main>{children}</main>
               <Toaster />
             </SidebarInset>
