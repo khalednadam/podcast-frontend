@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "./ui/button";
 import { ChevronLeft, ChevronRight, EllipsisVertical } from "lucide-react";
 import DemoDialog from "@/components/demo-dialog";
-import SearchInput from "./search-input";
+import SearchInput from "@/components/search-input";
 
 const Header = () => {
   return (
