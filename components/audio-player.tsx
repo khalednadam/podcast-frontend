@@ -116,25 +116,31 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
       console.log("Audio loadstart - setting loading to true");
       setIsLoading(true);
     };
-    
+
     const handleCanPlay = () => {
       console.log("Audio canplay - setting loading to false");
       setIsLoading(false);
-      if (episode && !localStorage.getItem(`episode_${episode.episodeGuid}_paused`)) {
-        audio.play().then(() => {
-          setInternalIsPlaying(true);
-        }).catch((error) => {
-          console.error("Error auto-playing:", error);
-          setInternalIsPlaying(false);
-        });
+      if (
+        episode &&
+        !localStorage.getItem(`episode_${episode.episodeGuid}_paused`)
+      ) {
+        audio
+          .play()
+          .then(() => {
+            setInternalIsPlaying(true);
+          })
+          .catch((error) => {
+            console.error("Error auto-playing:", error);
+            setInternalIsPlaying(false);
+          });
       }
     };
-    
+
     const handleEnded = () => {
       setInternalIsPlaying(false);
       setIsLoading(false);
     };
-    
+
     const handleError = () => {
       setInternalIsPlaying(false);
       setIsLoading(false);
@@ -232,16 +238,22 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
         localStorage.setItem(`episode_${episode.episodeGuid}_paused`, "true");
       } else {
         setIsLoading(true);
-        audioRef.current.play().then(() => {
-          setInternalIsPlaying(true);
-          setIsLoading(false);
-          localStorage.setItem(`episode_${episode.episodeGuid}_playing`, "true");
-          localStorage.removeItem(`episode_${episode.episodeGuid}_paused`);
-        }).catch((error) => {
-          console.error("Error playing audio:", error);
-          setIsLoading(false);
-          setInternalIsPlaying(false);
-        });
+        audioRef.current
+          .play()
+          .then(() => {
+            setInternalIsPlaying(true);
+            setIsLoading(false);
+            localStorage.setItem(
+              `episode_${episode.episodeGuid}_playing`,
+              "true"
+            );
+            localStorage.removeItem(`episode_${episode.episodeGuid}_paused`);
+          })
+          .catch((error) => {
+            console.error("Error playing audio:", error);
+            setIsLoading(false);
+            setInternalIsPlaying(false);
+          });
       }
     }
 
@@ -326,7 +338,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
 
       <div
         className={
-          "fixed bottom-2 right-3 z-50 border-t border-border shadow-lg transition-all duration-300  w-full md:w-[calc(100%-246px)] rounded bg-background overflow-hidden"
+          "fixed bottom-2 left-1/2 -translate-x-1/2 md:left-auto md:right-2 md:translate-x-0 z-50 border-t border-border shadow-lg transition-all duration-300  w-[90%]  md:w-[calc(100%-246px)] rounded bg-background overflow-hidden"
         }
       >
         <div
@@ -335,7 +347,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
             background: `linear-gradient(to bottom, ${genreColor}20, ${genreColor}10)`,
           }}
         >
-          <div className="flex items-center mb-0">
+          <div className="flex items-center mb-0 ">
             <Image
               src={episode.artworkUrl160}
               alt={episode.trackName}
@@ -349,10 +361,12 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
                 style={{ fontFamily: "var(--font-gtamerica)" }}
               >
                 {isLoading ? (
-                  <span className="flex items-center gap-1">
-                    loading
-                  </span>
-                ) : isPlaying ? "playing" : "paused"}
+                  <span className="flex items-center gap-1">loading</span>
+                ) : isPlaying ? (
+                  "playing"
+                ) : (
+                  "paused"
+                )}
               </p>
               <h4 className="font-medium text-sm truncate">
                 {episode.trackName}
@@ -362,13 +376,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
                   className="text-xs text-muted-foreground truncate"
                   style={{ color: genreColor }}
                 >
-                  {episode.collectionName} 
+                  {episode.collectionName}
                 </p>
               </Link>
             </div>
           </div>
 
-          <div className="flex items-center space-y-2 flex-1">
+          <div className="flex items-center space-y-2 flex-1 flex-col md:flex-row">
             <div className="flex items-center space-x-1">
               <Button
                 variant={"ghost"}
@@ -471,7 +485,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 h-[80px] min-w-[50px] border-l  border-white/20">
+          <div className="grid-cols-1 h-[80px] min-w-[50px] border-l  border-white/20 md:grid hidden">
             <div
               className={
                 "flex justify-between items-center space-x-2 border-b border-white/20 px-2"
@@ -532,6 +546,68 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
                 Stop
               </p>
             </div>
+          </div>
+        </div>
+        <div className="grid-cols-3 border-l  border-white/20 grid md:hidden">
+          <div
+            className={
+              "flex justify-between items-center space-x-2 border-r border-white/20 px-2"
+            }
+          >
+            <Volume1
+              fill={"white"}
+              width={15}
+              onClick={() => lowerVolume()}
+              className={"cursor-pointer"}
+            />
+            <p
+              className={"text-xs w-[30px] text-center select-none"}
+              style={{ fontFamily: "var(--font-sfMono)" }}
+            >
+              {Math.floor(volume * 100)}%
+            </p>
+            <Volume2
+              fill={"white"}
+              width={15}
+              onClick={() => raiseVolume()}
+              className={"cursor-pointer"}
+            />
+          </div>
+          <div
+            className={
+              "flex justify-between items-center space-x-2 border-r border-white/20 px-2"
+            }
+          >
+            <Minus
+              width={15}
+              onClick={() => slower()}
+              className={"cursor-pointer"}
+            />
+            <p
+              className={"text-xs w-[30px] text-center select-none"}
+              style={{ fontFamily: "var(--font-sfMono)" }}
+            >
+              {playbackSpeed}%
+            </p>
+            <Plus
+              width={15}
+              onClick={() => faster()}
+              className={"cursor-pointer"}
+            />
+          </div>
+          <div
+            className={
+              "flex justify-start items-center space-x-2 px-2 cursor-pointer select-none"
+            }
+            onClick={() => stop()}
+          >
+            <Square fill={"white"} width={15} className={"cursor-pointer"} />
+            <p
+              className={"text-xs w-[30px] uppercase !select-none"}
+              style={{ fontFamily: "var(--font-sfMono)" }}
+            >
+              Stop
+            </p>
           </div>
         </div>
       </div>
