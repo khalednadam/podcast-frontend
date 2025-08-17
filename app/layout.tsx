@@ -8,6 +8,7 @@ import {
 import { AppSidebar } from "@/components/app-sidebar";
 import Header from "@/components/header";
 import localFont from "next/font/local";
+import { Toaster } from "sonner";
 
 const gtAmerica = localFont({
   src: './fonts/gt-america.woff',
@@ -47,6 +48,7 @@ export default function RootLayout({
             <SidebarInset className="w-[calc(100%-225px)]">
               <Header />
               <main>{children}</main>
+              <Toaster />
             </SidebarInset>
           </SidebarProvider>
         </ThemeProvider>

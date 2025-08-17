@@ -12,13 +12,12 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Replace this URL with your actual external API endpoint
-    const externalApiUrl = `http://localhost:3000/search?query=${encodeURIComponent(query)}`;
+    const baseUrl = process.env.EXTERNAL_API_BASE_URL || 'http://localhost:3000';
+    const externalApiUrl = `${baseUrl}/search?query=${encodeURIComponent(query)}`;
+    console.log(externalApiUrl);
     
-    // You can add your API key here if needed
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
-      // 'Authorization': `Bearer ${process.env.EXTERNAL_API_KEY}`,
     };
 
     const response = await fetch(externalApiUrl, {
