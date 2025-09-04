@@ -1,9 +1,6 @@
-import React from 'react'
-import Image from "next/image";
+import React from "react";
 
 const Logo = () => {
-    return (
-        <Image src={'/khaled.webp'} alt="Logo" width={60} height={60} className="rounded-lg" />
-    )
-}
-export default Logo
+  return <p className="font-bold">KN-Podcast</p>;
+};
+export default Logo;
