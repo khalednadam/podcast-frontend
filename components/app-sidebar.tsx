@@ -66,7 +66,7 @@ export function AppSidebar() {
                     <a
                       href={item.url}
                       className={
-                        "flex py-[10px] items-center relative before:absolute before:inset-0 before:opacity-0 hover:before:opacity-100 before:bg-[radial-gradient(50%_50%_at_0%_50%,var(--color)_0%,rgba(19,241,255,0)_100%)]"
+                        "flex py-[10px] items-center relative before:absolute before:inset-0 before:opacity-0 hover:before:opacity-100"
                       }
                       style={{ "--color": item.color } as never}
                     >
@@ -96,7 +96,7 @@ export function AppSidebar() {
                     <a
                       href={item.url}
                       className={
-                        "flex py-[10px] items-center relative before:absolute before:inset-0 before:opacity-0 hover:before:opacity-100 before:bg-[radial-gradient(50%_50%_at_0%_50%,var(--color)_0%,rgba(19,241,255,0)_100%)]"
+                        "flex py-[10px] items-center relative before:absolute before:inset-0 before:opacity-0 hover:before:opacity-100"
                       }
                       style={{ "--color": item.color } as never}
                     >

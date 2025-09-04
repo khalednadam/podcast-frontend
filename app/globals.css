@@ -4,21 +4,21 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-    --arc-palette-foregroundPrimary: #EEF0F9FF;
-    --arc-palette-focus: #5D72BBCE;
-    --arc-palette-backgroundExtra: #141523;
-    --arc-palette-subtitle: #77787DFF;
-    --arc-palette-hover: #6D80C27A;
-    --arc-palette-maxContrastColor: #EEF0F9FF;
-    --arc-background-simple-color: #3B56B7FF;
-    --arc-palette-title: #E1E5F2FF;
-    --arc-palette-foregroundTertiary: #3B56B7FF;
-    --arc-palette-background: #161727;
-    --arc-palette-minContrastColor: #3750ACFF;
-    --arc-palette-foregroundSecondary: #8294D7FF;
-    --arc-palette-cutoutColor: #2e2e38;
+    --arc-palette-foregroundPrimary: #E9E3DF;
+    --arc-palette-focus: #465C88;
+    --arc-palette-backgroundExtra: #000000;
+    --arc-palette-subtitle: #465C88;
+    --arc-palette-hover: #465C88;
+    --arc-palette-maxContrastColor: #E9E3DF;
+    --arc-background-simple-color: #FF7A30;
+    --arc-palette-title: #E9E3DF;
+    --arc-palette-foregroundTertiary: #FF7A30;
+    --arc-palette-background: #000000;
+    --arc-palette-minContrastColor: #465C88;
+    --arc-palette-foregroundSecondary: #FF7A30;
+    --arc-palette-cutoutColor: #465C88;
     --radius: 0.625rem;
-    --color-border: #2e2e38;
+    --color-border: #465C88;
 }
 
 @theme inline {

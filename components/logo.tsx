@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Logo = () => {
     return (
-        <Image src={'/podbay.png'} alt="Logo" width={48} height={48}/>
+        <Image src={'/khaled.webp'} alt="Logo" width={60} height={60} className="rounded-lg" />
     )
 }
 export default Logo
